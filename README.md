@@ -70,13 +70,22 @@ or  total_sale is null
 The following SQL queries were developed to answer specific business questions:
 
 1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
+	
+ **SQL Query:**
 ```sql
 select *
 from sales_tb
 where sale_date ='2022-11-05';
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/d317cbc5-b178-480f-9047-2e1d1aa5d57c)
+
+
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
+
+**SQL Query:**
 ```sql
 SELECT * 
 FROM sales_tb 
@@ -85,7 +94,14 @@ WHERE category = 'Clothing'
   AND quantity >= 4;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/840b78ce-4fdf-4182-9330-3e621bc6c5dc)
+
+
 3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
+
+**SQL Query:**
 ```sql
 select 
 	category,
@@ -95,26 +111,50 @@ from sales_tb
 group by category;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/e5604d5c-0149-4ad8-8210-ace38a57dc22)
+
 4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
+
+**SQL Query:**
 ```sql
 select round(avg(age),2) as avg_age from sales_tb
 where category='Beauty';
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/f8e5cf06-0886-460e-b0c2-98ab9cd7269f)
+
 5. **Write a SQL query to Compare sales between male and female customers by total revenue.**:
+
+**SQL Query:**
 ```sql
 select gender, sum(total_sale) as total_revenue
 from sales_tb
 group by gender;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/22a8fdfc-02ab-4711-9957-dc114bb482e5)
+
 6. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
+
+**SQL Query:**
 ```sql
 select * from sales_tb
 where total_sale>1000;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/327c74b4-8c33-45a4-a97d-b166222e1fb7)
+
 7. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
+
+**SQL Query:**
 ```sql
 select category,gender,count(*) as total_trans from sales_tb 
 group by category,
@@ -122,7 +162,13 @@ gender
 order by category;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/7e2eb5e8-0e93-4097-a241-6a89dde0f361)
+
 8. **Write a SQL query to calculate the average sale for each month**:
+
+**SQL Query:**
 ```sql
 select extract(year from sale_date) as year,
 	extract(month from sale_date) as month,
@@ -130,11 +176,18 @@ select extract(year from sale_date) as year,
     group by year , month
     order by year;
 ```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/df0c89c9-2c3b-4863-9259-1132886587a0)
+
 9. **Write a SQL query to find out best selling month in each year**:
+
+**SQL Query:**
 ```sql
 select year,
        month,
-    avg_sale
+     round(avg_sale, 2) as avg_sale
 from 
 (    
 select 
@@ -148,7 +201,13 @@ group by year, month
 where ranking = 1;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/4c80cf75-aee1-4a1f-be35-b70bd4a41c7e)
+
 10. **Write a SQL query to find the top 1 most frequently purchased item category.**:
+
+**SQL Query:**
 ```sql
 select category, count(*) as total_purchases
 from sales_tb
@@ -157,7 +216,14 @@ order by total_purchases desc
 limit 1;
 
 ```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/31f70888-5bae-471e-af27-3c8dc0c0c1cc)
+
 11. **Write a SQL query to find the top 5 customers based on the highest total sales**:
+
+**SQL Query:**
 ```sql
 select 
 	customer_id,
@@ -167,7 +233,14 @@ group by customer_id
 order by total_sales desc 
 limit 5;
 ```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/fcf465b9-1e45-453e-a60d-7e4e4ff9f372)
+
 12. **Write a SQL query to find the number of customers who purchased multiple categories**:
+
+**SQL Query:**
 ```sql
 SELECT customer_id, COUNT(DISTINCT category) AS category_count
 FROM sales_tb
@@ -176,7 +249,14 @@ HAVING category_count > 1
 order by category_count desc
 limit 5;
 ```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/9bad13e9-37ef-472d-a2bd-8e87b415acfe)
+
 13. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
+
+**SQL Query:**
 ```sql
 select 
 	category ,
@@ -185,7 +265,13 @@ from sales_tb
 group by category;
 ```
 
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/b1374196-56a7-4c1a-abbb-4978b674349c)
+
 14. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
+
+**SQL Query:**
 ```sql
 with hourly_sale as
 	(select *,
@@ -201,6 +287,49 @@ select shift,
 from hourly_sale
 group by shift;
 ```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/829475c8-0965-464a-9297-18432e78eb09)
+
+15. **Segment customers into age groups and determine which group spends the most.**:
+
+**SQL Query:**
+```sql
+select 
+    case 
+        when age < 20 then 'below 20'
+        when age between 20 and 29 then '20s'
+        when age between 30 and 39 then '30s'
+        when age between 40 and 49 then '40s'
+        else '50 and above'
+    end as age_group,
+    sum(total_sale) as total_spent
+from sales_tb
+group by age_group
+order by total_spent desc;
+```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/ca9a018b-76ef-40b4-8abd-086f724a5bf2)
+
+16. **Determine the profitability of each category by calculating the profit margin.**:
+
+**SQL Query:**
+```sql
+select 
+    category,
+    round((sum(total_sale) - sum(cogs)) * 100.0 / sum(total_sale), 2) as profit_margin_pct
+from sales_tb
+group by category
+order by profit_margin_pct desc;
+```
+
+**Output / Result Table:**
+
+![image](https://github.com/user-attachments/assets/933696f4-7b45-4130-abfb-b5eca95a463d)
+
 
 ## Findings
 
