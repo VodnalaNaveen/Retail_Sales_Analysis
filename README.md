@@ -37,6 +37,21 @@ create table sales_tb(
                         cogs float,
                         total_sale float);
 ```
+### 🧾 Table: `sales_tb`
+
+| Column Name      | Data Type | Description                                 |
+|------------------|-----------|---------------------------------------------|
+| transaction_id   | INT       | Unique transaction ID                       |
+| sale_date        | DATE      | Date of the sale (e.g., 2022-05-11)         |
+| sale_time        | TIME      | Time of the sale (e.g., 10:47:00)           |
+| customer_id      | INT       | Unique customer identifier                  |
+| gender           | VARCHAR   | Gender of the customer (Male/Female)        |
+| age              | INT       | Age of the customer                         |
+| category         | VARCHAR   | Product category (e.g., Clothing, Beauty)   |
+| quantity         | INT       | Number of units sold                        |
+| price_per_unit   | FLOAT     | Price of a single unit                      |
+| cogs             | FLOAT     | Cost of goods sold per unit                 |
+| total_sale       | FLOAT     | Total sale amount (quantity × price/unit)   |
 
 ### 2. Data Exploration & Cleaning
 
